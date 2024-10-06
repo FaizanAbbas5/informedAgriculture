@@ -52,7 +52,8 @@ def dashboard(request):
             return JsonResponse(response_data)  # Send back a JSON response                
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
-        
+
+@csrf_exempt        
 def waitResult(extracted_value, years):
     api_url = 'https://climateserv.servirglobal.net/api/getDataRequestProgress/'
     for index, params in enumerate(extracted_value):
@@ -87,6 +88,7 @@ def waitResult(extracted_value, years):
 
     return overall_average
 
+@csrf_exempt
 def createRequests(data, years):
     min_lat = data.get('minLat')
     max_lat = data.get('maxLat')
